@@ -1,0 +1,28 @@
+# nginx-waf-ui configuration
+# Copy to /etc/nginx-waf-ui/config.yaml and adjust
+
+server:
+  listen: ":8081"
+  # TLS (optional)
+  # tls:
+  #   cert: /etc/nginx-waf-ui/cert.pem
+  #   key: /etc/nginx-waf-ui/key.pem
+
+# Connection to nginx-waf-api
+api:
+  url: http://127.0.0.1:8080
+  api_key: ${NGINX_WAF_API_KEY}
+  timeout: 10s
+
+# Session storage
+session:
+  secret: ${SESSION_SECRET}
+  max_age: 86400  # 24 hours
+
+# Database (for users and audit log)
+database:
+  path: /var/lib/nginx-waf-ui/data.db
+
+logging:
+  level: info
+  format: text

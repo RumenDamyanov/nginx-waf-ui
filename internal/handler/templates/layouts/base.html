@@ -1,0 +1,63 @@
+{{define "base"}}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{.Title}} - nginx-waf</title>
+    <script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
+    <style>
+        :root { --bg: #f8f9fa; --fg: #212529; --card: #fff; --border: #dee2e6;
+                --primary: #0d6efd; --danger: #dc3545; --success: #198754; --muted: #6c757d; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--fg); line-height: 1.5; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 1rem; }
+        nav { background: #212529; color: #fff; padding: 0.75rem 1rem; display: flex; justify-content: space-between; align-items: center; }
+        nav a { color: #fff; text-decoration: none; margin-left: 1rem; }
+        nav a:hover { text-decoration: underline; }
+        .nav-brand { font-weight: bold; font-size: 1.1rem; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; margin-bottom: 1rem; }
+        .stat { text-align: center; }
+        .stat .num { font-size: 2rem; font-weight: bold; color: var(--primary); }
+        .stat .label { color: var(--muted); font-size: 0.85rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border); }
+        th { font-weight: 600; font-size: 0.85rem; color: var(--muted); text-transform: uppercase; }
+        .btn { display: inline-block; padding: 0.4rem 1rem; border: none; border-radius: 4px; cursor: pointer; font-size: 0.9rem; text-decoration: none; }
+        .btn-primary { background: var(--primary); color: #fff; }
+        .btn-danger { background: var(--danger); color: #fff; }
+        .btn-sm { padding: 0.2rem 0.5rem; font-size: 0.8rem; }
+        .btn:hover { opacity: 0.9; }
+        input[type=text], input[type=password] { padding: 0.5rem; border: 1px solid var(--border); border-radius: 4px; font-size: 1rem; width: 100%; }
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; margin-bottom: 0.25rem; font-weight: 500; }
+        .flash { padding: 0.75rem 1rem; border-radius: 4px; margin-bottom: 1rem; background: #f8d7da; color: #842029; border: 1px solid #f5c2c7; }
+        .flash-success { background: #d1e7dd; color: #0f5132; border-color: #badbcc; }
+        .login-box { max-width: 400px; margin: 4rem auto; }
+        .text-muted { color: var(--muted); }
+        .inline-form { display: inline; }
+        .flex { display: flex; gap: 0.5rem; align-items: center; }
+    </style>
+</head>
+<body>
+{{if .Username}}
+<nav>
+    <div>
+        <span class="nav-brand">nginx-waf</span>
+        <a href="/">Dashboard</a>
+        <a href="/lists">Lists</a>
+    </div>
+    <div>
+        <span class="text-muted">{{.Username}}</span>
+        <form method="POST" action="/logout" class="inline-form" style="display:inline">
+            <button type="submit" class="btn btn-sm" style="background:transparent;color:#fff;border:1px solid #555;">Logout</button>
+        </form>
+    </div>
+</nav>
+{{end}}
+<div class="container">
+{{if .Flash}}<div class="flash">{{.Flash}}</div>{{end}}
+{{template "content" .}}
+</div>
+</body>
+</html>{{end}}

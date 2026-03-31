@@ -1,0 +1,39 @@
+{{define "list_detail.html"}}{{template "base" .}}{{end}}
+{{define "content"}}
+{{with .Data}}
+<h1 style="margin:1rem 0">List: {{.Name}}</h1>
+{{if .Error}}<div class="flash">Error: {{.Error}}</div>{{end}}
+{{if .Detail}}
+<div class="card">
+    <h3 style="margin-bottom:0.75rem">Add Entry</h3>
+    <form method="POST" action="/lists/{{.Name}}/entries" class="flex">
+        <input type="text" name="ip" placeholder="IP or CIDR (e.g. 192.168.1.0/24)" style="max-width:400px" required>
+        <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+</div>
+<div class="card">
+    <h3 style="margin-bottom:0.75rem">Entries ({{.Detail.Entries}})</h3>
+    {{if .Detail.IPs}}
+    <table>
+        <thead><tr><th>IP / CIDR</th><th></th></tr></thead>
+        <tbody>
+        {{$name := .Name}}
+        {{range .Detail.IPs}}
+        <tr>
+            <td><code>{{.}}</code></td>
+            <td>
+                <form method="POST" action="/lists/{{$name}}/entries/{{.}}/delete" class="inline-form">
+                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Remove this entry?')">Remove</button>
+                </form>
+            </td>
+        </tr>
+        {{end}}
+        </tbody>
+    </table>
+    {{else}}
+    <p class="text-muted">No entries in this list.</p>
+    {{end}}
+</div>
+{{end}}
+{{end}}
+{{end}}

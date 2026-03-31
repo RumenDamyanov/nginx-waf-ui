@@ -1,0 +1,40 @@
+{{define "dashboard.html"}}{{template "base" .}}{{end}}
+{{define "content"}}
+<h1 style="margin:1rem 0">Dashboard</h1>
+{{with .Data}}
+{{if .APIError}}<div class="flash">API connection error: {{.APIError}}</div>{{end}}
+<div class="grid">
+    <div class="card stat">
+        <div class="num">{{.TotalLists}}</div>
+        <div class="label">IP Lists</div>
+    </div>
+    <div class="card stat">
+        <div class="num">{{.TotalEntries}}</div>
+        <div class="label">Total Entries</div>
+    </div>
+</div>
+{{if .Lists}}
+<div class="card">
+    <h3 style="margin-bottom:0.75rem">Lists Overview</h3>
+    <table>
+        <thead><tr><th>Name</th><th>Entries</th><th>Modified</th><th></th></tr></thead>
+        <tbody>
+        {{range .Lists}}
+        <tr>
+            <td><a href="/lists/{{.Name}}">{{.Name}}</a></td>
+            <td>{{.Entries}}</td>
+            <td class="text-muted">{{.ModTime}}</td>
+            <td><a href="/lists/{{.Name}}" class="btn btn-sm btn-primary">View</a></td>
+        </tr>
+        {{end}}
+        </tbody>
+    </table>
+</div>
+{{end}}
+<div style="margin-top:1rem">
+    <form method="POST" action="/reload" class="inline-form">
+        <button type="submit" class="btn btn-primary">Reload nginx</button>
+    </form>
+</div>
+{{end}}
+{{end}}

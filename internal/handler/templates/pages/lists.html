@@ -1,0 +1,26 @@
+{{define "lists.html"}}{{template "base" .}}{{end}}
+{{define "content"}}
+<h1 style="margin:1rem 0">IP Lists</h1>
+{{with .Data}}
+{{if .Error}}<div class="flash">Error loading lists: {{.Error}}</div>{{end}}
+{{if .Lists}}
+<div class="card">
+    <table>
+        <thead><tr><th>Name</th><th>Entries</th><th>Modified</th><th></th></tr></thead>
+        <tbody>
+        {{range .Lists}}
+        <tr>
+            <td><a href="/lists/{{.Name}}">{{.Name}}</a></td>
+            <td>{{.Entries}}</td>
+            <td class="text-muted">{{.ModTime}}</td>
+            <td><a href="/lists/{{.Name}}" class="btn btn-sm btn-primary">Manage</a></td>
+        </tr>
+        {{end}}
+        </tbody>
+    </table>
+</div>
+{{else}}
+<div class="card"><p class="text-muted">No IP lists found.</p></div>
+{{end}}
+{{end}}
+{{end}}
