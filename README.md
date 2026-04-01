@@ -2,15 +2,13 @@
 
 Web management interface for nginx-waf.
 
-> **PLANNED PROJECT** - This project is scaffolded and ready for implementation.
-
 ## Overview
 
 nginx-waf-ui is a web-based management interface for nginx-waf. It provides a
 dashboard for managing IP lists, viewing block statistics, and configuring WAF
 settings through a browser.
 
-## Features (Planned)
+## Features
 
 - Dashboard with block statistics and trends
 - IP list management (add, remove, search)
@@ -64,10 +62,18 @@ sudo systemctl enable --now nginx-waf-ui
 
 ## Related Projects
 
+### nginx-waf Ecosystem
+
 - [nginx-waf](https://github.com/RumenDamyanov/nginx-waf) - Core nginx module (required)
 - [nginx-waf-api](https://github.com/RumenDamyanov/nginx-waf-api) - REST API (required)
 - [nginx-waf-feeds](https://github.com/RumenDamyanov/nginx-waf-feeds) - Threat feed updater
 - [nginx-waf-lua](https://github.com/RumenDamyanov/nginx-waf-lua) - OpenResty Lua integration
+
+### Other Nginx Modules
+
+- [nginx-torblocker](https://github.com/RumenDamyanov/nginx-torblocker) - Control access from Tor exit nodes
+- [nginx-cf-realip](https://github.com/RumenDamyanov/nginx-cf-realip) - Automatic Cloudflare IP list fetcher for real client IP restoration
+- [nginx-gone](https://github.com/RumenDamyanov/nginx-gone) - Return HTTP 410 Gone for permanently removed URIs
 
 ## License
 
