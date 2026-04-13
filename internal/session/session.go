@@ -59,7 +59,7 @@ func (s *Store) Create(w http.ResponseWriter, username string) {
 		MaxAge:   s.maxAge,
 		HttpOnly: true,
 		SameSite: http.SameSiteStrictMode,
-		Secure:   false,
+		Secure:   true,
 	})
 }
 
@@ -117,6 +117,7 @@ func (s *Store) Destroy(w http.ResponseWriter, r *http.Request) {
 		Path:     "/",
 		MaxAge:   -1,
 		HttpOnly: true,
+		Secure:   true,
 	})
 }
 
